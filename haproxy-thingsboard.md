@@ -25,6 +25,11 @@ sudo ln -s /snap/bin/certbot /usr/bin/certbot
 
 sudo certbot certonly -a standalone --http-01-port 54321 -d catapult.evergreeninnovations.co 
 
+## To add subdomains
+sudo certbot certonly -a standalone --http-01-port 54321 -d catapult.evergreeninnovations.co -d dev.evergreeninnovations.co --expand
+
+
+
 Reference: https://certbot.eff.org/lets-encrypt/ubuntubionic-haproxy.html
 
 ## After generating files
