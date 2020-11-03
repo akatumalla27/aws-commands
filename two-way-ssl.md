@@ -30,7 +30,7 @@ openssl rsa -in example.org.pubkey -pubin -noout -text
 ## CSR to prove ownership
 
 openssl req -new -key ec2server.key -out ec2server.csr
-
+``` shell
 ubuntu@ip-10-0-1-189:~$ openssl req -new -key ec2server.key -out ec2server.csr
 Can't load /home/ubuntu/.rnd into RNG
 140638791922112:error:2406F079:random number generator:RAND_load_file:Cannot open file:../crypto/rand/randfile.c:88:Filename=/home/ubuntu/.rnd
@@ -53,3 +53,11 @@ Please enter the following 'extra' attributes
 to be sent with your certificate request
 A challenge password []:
 An optional company name []:
+```
+
+openssl req -in ec2server.csr -noout -text
+
+
+
+ sudo openssl x509 -req -in server.csr -passin file:mypass.enc -CA /root/tls/certs/cacert.pem -CAkey /root/tls/private/cakey.pem  -out client.cert.pem -CAcreateserial -days 365 -sha256 -extfile server_cert_ext.cnf
+
