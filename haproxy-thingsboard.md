@@ -43,3 +43,11 @@ sudo mkdir -p /etc/haproxy/certs
 DOMAIN='catapult.evergreeninnovations.co' sudo -E bash -c 'cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/letsencrypt/live/$DOMAIN/privkey.pem > /etc/haproxy/certs/$DOMAIN.pem'
 
 sudo chmod -R go-rwx /etc/haproxy/certs
+
+# Setting environmental variables in haproxy
+```
+sudo vi /etc/default/haproxy
+VARIABLE_NAME="variable value"
+sudo vi /etc/haproxy/haproxy.cfg
+"${VARIABLE_NAME}"
+```
