@@ -1,5 +1,5 @@
 ## Check current space on EBS volume
-
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html
 df -h
 
 df -hT
