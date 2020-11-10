@@ -8,7 +8,9 @@ git clone https://github.com/josh-thurston/easyBEATS
 
 sudo chmod 755 easyBEATS
 
-vi easyBEATS
+cd easyBEATS
+
+nano easyBEATS
 
 change filebeat version to the latest (as of 2020/11/06):
 
@@ -31,11 +33,11 @@ INSTALL_LOCAL=false # AK didnt use this yet
 ./easyBEATS
 
 * If any errors while running the above, you can run the script commands:
-
+```
 sudo mkdir -p /usr/share//bin;
 sudo mkdir -p /etc/filebeat;
 sudo mkdir -p /var/lib/filebeat
-
+```
 ```
     sudo cp $HOME/${WORKING_DIR}/src/github.com/elastic/beats/${beat}/${beat} /usr/share/filebeat/bin
     sudo cp $HOME/${WORKING_DIR}/src/github.com/elastic/beats/${beat}/${beat}.reference.yml /etc/filebeat
@@ -46,7 +48,7 @@ sudo mkdir -p /var/lib/filebeat
     sudo cp -R $HOME/${WORKING_DIR}/src/github.com/elastic/beats/${beat}/module /usr/share/filebeat
     sudo cp -R $HOME/${WORKING_DIR}/src/github.com/elastic/beats/${beat}/modules.d/ /etc/$filebeat
 
-  sudo cp $HOME/easyBEATS/services/filebeat.service /lib/systemd/system
+  sudo cp $HOME/Documents/easyBEATS/services/filebeat.service /lib/systemd/system
   sudo chmod -R 755 /etc/filebeat/;
   sudo chown -R root:root /etc/filebeat;
   sudo chown -R root:root /usr/share/filebeat/*;
@@ -55,7 +57,7 @@ sudo mkdir -p /var/lib/filebeat
 ```
 * Edit yaml file as needed
 cd /etc/filebeat
-sudo vi filebeat.yml
+sudo nano filebeat.yml
 
 * Run filebeat
 sudo systemctl start filebeat.service
