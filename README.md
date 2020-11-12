@@ -14,3 +14,12 @@ curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.
 sudo dpkg -i metricbeat-7.6.2-amd64.deb
 
 https://logz.io/blog/monitor-ec2-metricbeat-elk/
+
+
+sudo nano /etc/metricbeat/modules.d/aws.yml
+
+sudo nano /etc/metricbeat/modules.d/system.yml
+
+sudo service metricbeat restart
+
+sudo service metricbeat status
