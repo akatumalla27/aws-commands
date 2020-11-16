@@ -51,3 +51,4 @@ VARIABLE_NAME="variable value"
 sudo vi /etc/haproxy/haproxy.cfg
 "${VARIABLE_NAME}"
 ```
+journalctl -f -n 100
