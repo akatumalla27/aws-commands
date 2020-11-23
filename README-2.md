@@ -1,7 +1,7 @@
 
-chmod 400 "../../08-aws/pemKey/SSHKeyPair.pem"
+chmod 400 Dropbox\ \(EGI\)/egi_tech_int/07-catapult/08-aws/pemKey/SSHKeyPair.pem 
 
-ssh-add -K "../../08-aws/pemKey/SSHKeyPair.pem" 
+ssh-add -K Dropbox\ \(EGI\)/egi_tech_int/07-catapult/08-aws/pemKey/SSHKeyPair.pem 
 
 ssh -A ubuntu@ec2-3-131-54-4.us-east-2.compute.amazonaws.com 
 
