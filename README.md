@@ -23,3 +23,9 @@ sudo nano /etc/metricbeat/modules.d/system.yml
 sudo service metricbeat restart
 
 sudo service metricbeat status
+
+
+To start metricbeat on boot:
+systemctl enable metricbeat
+
+https://www.elastic.co/guide/en/beats/metricbeat/current/running-with-systemd.html
