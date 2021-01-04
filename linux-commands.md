@@ -21,3 +21,6 @@ less /proc/meminfo
 sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
 
 sudo sysctl -w vm.drop_caches=3
+
+
+ sudo tcpdump -XX -i ens5 dst 10.0.1.45
