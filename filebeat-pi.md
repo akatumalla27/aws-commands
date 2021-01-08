@@ -56,15 +56,18 @@ sudo mkdir -p /var/lib/filebeat
   sudo systemctl enable filebeat;
 ```
 * Edit yaml file as needed
+```
 cd /etc/filebeat
 sudo nano filebeat.yml
-
+```
 * Run filebeat
+```
 sudo systemctl start filebeat.service
 
 sudo systemctl restart filebeat.service
 
 sudo systemctl status filebeat.service
+```
 
 
 
