@@ -19,7 +19,7 @@ BEAT_NAME=( filebeat ) #metricbeat filebeat packetbeat auditbeat heartbeat
 INSTALL_LOCAL=false # AK didnt use this yet
 
 * Comment out lines which install Go, (if already present on the ARM machine)
-
+```
   echo "Installing go..."
   wget https://dl.google.com/go/go1.13.8.linux-armv6l.tar.gz
   sudo tar -C /usr/share -xzf go1.13.8.linux-armv6l.tar.gz
@@ -28,7 +28,7 @@ INSTALL_LOCAL=false # AK didnt use this yet
   export PATH=$PATH:/usr/share/go/bin;
   export GOPATH=$HOME/${WORKING_DIR};
   rm go1.13.8.linux-armv6l.tar.gz;
-  
+``` 
 * Run the script
 ./easyBEATS
 
