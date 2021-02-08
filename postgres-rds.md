@@ -12,3 +12,6 @@ thingsboard=> select * from pg_stat_activity where pid=29721;
  16402 | thingsboard | 29721 |    16399 | egiAdmin |                  | 10.0.11.82  |                 |       43450 | 2021-01-04 19:41:43.353807+00 |            | 2021-01-04 19:50:38.536663+00 | 2021-01-04 19:50:38.537454+00 | Client          | ClientRead | idle  |             |              | COMMIT | client backend
 (1 row)
 ```
+Tunnel:
+
+sudo ssh -N -L 5432:catapultdatabase.cjkelvolrvnc.us-east-2.rds.amazonaws.com:5432 ec2-3-131-54-4.us-east-2.compute.amazonaws.com -p 7000
