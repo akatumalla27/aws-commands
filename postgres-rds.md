@@ -1,6 +1,6 @@
+From public server (IP -> ip-10-0-1-189)
 ```
-psql --host catapultdatabase.cjkelvolrvnc.us-east-2.rds.amazonaws.com -U egiAdmin 
-
+sudo psql --host catapultdatabase.cjkelvolrvnc.us-east-2.rds.amazonaws.com -U egiAdmin catapultDatabase <database name>
 ```
 
 ```shell
