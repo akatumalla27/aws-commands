@@ -13,5 +13,30 @@ thingsboard=> select * from pg_stat_activity where pid=29721;
 (1 row)
 ```
 Tunnel:
+```
+sudo ssh -N -L 5431:catapultdatabase.cjkelvolrvnc.us-east-2.rds.amazonaws.com:5432 -i SSHKeyPair.pem ubuntu@ec2-3-131-54-4.us-east-2.compute.amazonaws.com -p 7000 
 
-sudo ssh -N -L 5432:catapultdatabase.cjkelvolrvnc.us-east-2.rds.amazonaws.com:5432 ec2-3-131-54-4.us-east-2.compute.amazonaws.com -p 7000
+sudo scp -i SSHKeyPair.pem -P 7000 SSHKeyPair.pem  ubuntu@ec2-3-131-54-4.us-east-2.compute.amazonaws.com:/home/ubuntu/tunnel/.
+sudo scp -i SSHKeyPair.pem -P 7000  tunnel.sh ubuntu@ec2-3-131-54-4.us-east-2.compute.amazonaws.com:/home/ubuntu/tunnel/.
+
+```
+tunnel.sh
+
+```
+#!/bin/bash
+remote_host=ubuntu@ec2-3-131-54-4.us-east-2.compute.amazonaws.com
+remote_port=5431
+local_port=5432 
+identity_file="SSHKeyPair.pem"
+db_host=catapultdatabase.cjkelvolrvnc.us-east-2.rds.amazonaws.com 
+cmd="ssh -p 7000 -fN -L ${remote_port}:${db_host}:${local_port} -i ${identity_file} ${remote_host} -o ExitOnForwardFailure=yes"
+
+while true; do
+    pgrep -fx "$cmd" >/dev/null 2>&1 || $cmd
+    sleep 10
+done
+```
+
+```
+sudo psql --host localhost --port 5431 -U egiAdmin catapultDatabase
+```
