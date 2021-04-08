@@ -1,3 +1,7 @@
+Install postgres client
+```
+sudo apt-get install postgresql-client
+```
 From public server (IP -> ip-10-0-1-189)
 ```
 sudo psql --host catapultdatabase.cjkelvolrvnc.us-east-2.rds.amazonaws.com -U egiAdmin catapultDatabase <database name>
