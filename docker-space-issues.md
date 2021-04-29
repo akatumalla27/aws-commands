@@ -90,3 +90,75 @@ File looks like, but do not remove this directly:
 -rw-r----- 1 root root 4514 Apr 29 19:14 77959d3cfdb490bdb650eaf441d84216a4e6e35cb2ea5bb8b4381a1bace14df3-json.log
 ```
 
+## Kibana
+
+We can use Elasticsearch API.
+
+Get all indices:
+```
+GET /_cat/indices
+
+
+green  open .kibana_task_manager_1   NPvZU0QlTqGtB0idLMfkIA 1 0    2 2  20.9kb  20.9kb
+yellow open metricbeat-7.6.2         ZlFwByBCRRye5PsZvz1JwQ 1 1    2 0  89.3kb  89.3kb
+green  open .apm-agent-configuration ODiisAv6STq8jlE4lBLAKg 1 0    0 0    283b    283b
+yellow open filebeat-7.11.2          kaV0dnHUSDullsYpBbgCuw 1 1  759 0 346.1kb 346.1kb
+green  open .kibana_1                kt3DEL_BRGaP7BaCjQqH3Q 1 0 1247 5 666.4kb 666.4kb
+yellow open filebeat-7.9.3           DIvl9FQxTDqkr33wQ2ArSA 1 1    8 0 178.9kb 178.9kb
+```
+Around -> 1301.9kb -> 1.3mb
+
+Delete old data in index:
+
+```shell
+DELETE /metricbeat-7.6.2
+{
+  "query": {
+    "range": {
+      "timestamp": {
+        "gte": "now-30d/d",
+        "lt": "now/d"
+      }
+    }
+  }
+}
+```
+```shell
+DELETE /filebeat-7.11.2
+{
+  "query": {
+    "range": {
+      "timestamp": {
+        "gte": "now-1d/d",
+        "lt": "now/d"
+      }
+    }
+  }
+}
+```
+
+Delete index.
+
+```shell
+DELETE /ilm-history-*
+```
+
+Get cluster health:
+```
+GET _cluster/health
+```
+
+Adding alias:
+
+```shell
+POST /_aliases
+{ "actions" :
+  [ 
+    { "add" : { 
+  "index" : "filebeat-7.9.3", 
+  "alias" : "sitesimulator-alias1" 
+      }
+    } 
+  ]   
+}
+```
