@@ -162,3 +162,89 @@ POST /_aliases
   ]   
 }
 ```
+
+## On system
+```
+du -a -h --max-depth=1 | sort -hr
+du -cha --max-depth=1 / | grep -E "M|G"
+```
+
+Remove unecessary applications
+```
+sudo apt-get purge --remove mosquitto*
+sudo apt-get autoremove
+```
+
+Remove old journalctl
+
+```
+journalctl --vacuum-time=2d
+```
+
+Crontab
+```
+Run every three days
+
+crontab -e
+
+0 23 */3 * * journalctl --vacuum-time=2d
+```
+
+Removing old snap verisons
+
+```
+Location:
+
+/var/lib/snapd/snaps
+sudo nano remove-old-snaps
+```
+```shell
+#!/bin/bash
+# Removes old revisions of snaps
+# CLOSE ALL SNAPS BEFORE RUNNING THIS
+set -eu
+
+LANG=en_US.UTF-8 snap list --all | awk '/disabled/{print $1, $3}' |
+    while read snapname revision; do
+        snap remove "$snapname" --revision="$revision"
+    done
+```
+```
+
+How To Remove Old Snap Versions To Free Up Disk Space
+ Logix  Updated on October 21, 2019 how-to, snap, tweaks
+Snapcraft logo
+
+I was using Disk Usage Analyzer recently to see if I could free up some space on my Ubuntu 18.10 desktop, when I noticed that the /var/lib/snapd/snaps/ folder was quite large.
+
+While investigating how I could free up some space / clear the snap cache from the /var/lib/snapd/snaps/ folder without removing the snap packages I had installed, I found out that by default, 3 snap versions are stored by the system after snap package updates. Meaning that for each installed snap package that had at least 2 updates, I had 3 revisions stored on my system, taking up quite a bit of disk space.
+
+There is a snap option (starting with snapd version 2.34), called refresh.retain, to set the maximum number of a snap's revisions stored by the system after the next refresh, which can be set to a number between 2 and 20. You can change this from the default value of 3 to 2 by using:
+
+sudo snap set system refresh.retain=2
+
+
+Related, but for Flatpak packages: How To Remove Unused Flatpak Runtimes To Free Up Disk Space
+
+But what if you want to remove all versions kept on the system for all snap packages that had updates? This is a script created by Popey, Community Manager in Ubuntu Engineering at Canonical, to remove ALL old versions of snaps, only keeping the current active version (updated with LANG=en_US.UTF-8 so it works with non-English locales, thanks to William in the comments):
+
+#!/bin/bash
+# Removes old revisions of snaps
+# CLOSE ALL SNAPS BEFORE RUNNING THIS
+set -eu
+
+LANG=en_US.UTF-8 snap list --all | awk '/disabled/{print $1, $3}' |
+    while read snapname revision; do
+        snap remove "$snapname" --revision="$revision"
+    done
+
+
+Using this script should free up some significant disk space (depending on the number of snap packages installed on your system, and if they had updates since they were installed). In my case, the script reduced the size of the /var/lib/snapd/snaps/ folder by more than 50%.
+
+Update: It looks like this script only works with English. For other languages you'll need to replace /disabled/ in the command with its translation to your language.
+
+To use this script create a file named remove-old-snaps, paste the contents from the code block above, save the file in your home directory, and make it executable using:
+
+chmod +x remove-old-snaps
+sudo ./remove-old-snaps
+```
