@@ -270,3 +270,18 @@ Repeat these steps for any additional volumes.
 
 
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html
+
+```shell
+lsblk
+
+AME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop1     7:1    0 55.5M  1 loop /snap/core18/2074
+loop2     7:2    0 33.3M  1 loop /snap/amazon-ssm-agent/3552
+loop3     7:3    0 32.3M  1 loop /snap/snapd/12398
+xvda    202:0    0   20G  0 disk 
+└─xvda1 202:1    0    8G  0 part /
+
+root@ip-10-0-1-143:~/.mytb-logs# sudo growpart /dev/xvda 1
+
+sudo resize2fs /dev/xvda1
+```
