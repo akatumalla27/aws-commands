@@ -227,3 +227,14 @@ LANG=en_US.UTF-8 snap list --all | awk '/disabled/{print $1, $3}' |
 chmod +x remove-old-snaps
 sudo ./remove-old-snaps
 ```
+Add to crontab
+
+```shell
+sudo crontab -e
+
+# m h  dom mon dow   command
+0 23 */3 * * journalctl --vacuum-time=1d
+0 0 1 * * apt-get autoremove
+0 23 */3 * * /home/ubuntu/./remove-old-snaps > /dev/null 2>&1
+
+```
