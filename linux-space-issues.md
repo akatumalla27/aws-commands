@@ -43,6 +43,7 @@ Check disk usage at the directory:
 
 ```shell
 sudo du -a -h --max-depth=1 | sort -hr
+sudo docker system prune
 ```
 ```shell
 Was:
