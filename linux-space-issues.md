@@ -238,3 +238,35 @@ sudo crontab -e
 0 23 */3 * * /home/ubuntu/./remove-old-snaps > /dev/null 2>&1
 
 ```
+
+Attaching a bigger EBS volume:
+
+https://aws.amazon.com/premiumsupport/knowledge-center/expand-ebs-root-volume-windows/
+
+An Amazon EC2 Windows instance created from an Amazon Machine Image (AMI) has a default 30 GB gp2 (General Purpose SSD) Amazon EBS root volume. You can expand the root volume using the Amazon EC2 console or the AWS Command Line Interface (AWS CLI). Then, extend the volume’s file system to use the new storage capacity.
+Expand the root volume. Then, extend the file system using the Amazon EC2 console (new console)
+
+1.    From the Amazon EC2 console, choose Instances from the navigation pane.
+
+2.    Select the instance that you want to expand. From the Description tab, choose the volume listed for Block devices. Then, choose the EBS ID.
+
+3.    Select the volume. For Actions, choose Modify Volume.
+
+4.    In the Size field, enter the Size. If you choose an io1 volume, enter the number of IOPS.
+
+5.    Choose Modify, and then choose Yes. Refresh the console page. In the Description tab, the State shows the progress of optimization until the modification is complete.
+
+Note: Windows root volumes are the master boot record (MBR) by default, and these volumes can be extended up to 2 TB.
+
+6.    You must extend the Windows file system for the EBS volume increase to reflect in the OS or Disk Management. Connect to your EC2 Windows instance using Remote Desktop Protocol (RDP).
+
+7.    Open a command prompt, and then run the diskmgmt.msc command to launch Disk Management. For Action, choose Refresh.
+
+8.    Open the context (right-click) menu for the Volume, and then choose Extend Volume.
+
+9.    Choose Next, Next, Finish.
+
+Repeat these steps for any additional volumes.
+
+
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html
