@@ -1,8 +1,11 @@
-# Welcome to the CATAPULT project!
+# CATAPULT Documentation
+The repository for the CATAPULT project components
 
-## Refer [Wiki](https://github.com/BoxpowerInc/catapult-documentation/wiki) for documentation.
+The general instructions to SSH into AWS EC2 instances. SSH is short for Secure Shell, which is a secure way to access a computer over a network.
 
----
+There are two types of AWS instances. One is the public instance which is hosted in the public subnet and another is a private instance that is hosted in the private instance. The private instance is not directly accessible from the internet. Refer to [catapult specification repository](https://github.com/BoxpowerInc/catapult-specification) for details.
+
+In order to SSH into the AWS network, the IP address needs to be added by the administrator to the AWS security group. This will be changed in the future to a VPN based solution.
 
 ## SSH into private instance
 
@@ -51,7 +54,3 @@ Database: thingsboard
 ```
 
 Click on ```Save```.
-
-### Help
-Please contact the developer at Evergreen Innovations ```alekhya@evergreeninnovations.co``` for any questions or queries.
-
